@@ -44,9 +44,10 @@ if not se.is_open:
     print 'Cannot open', dev
     exit(-1)
 
-th1 = thread.start_new_thread(input_thread, ())
-th2 = thread.start_new_thread(output_thread, ())
+thread.start_new_thread(input_thread, ())
+thread.start_new_thread(output_thread, ())
 
-th1.join()
-th2.join()
-print "xxxxx"
+while not is_exit:
+    sleep(1)
+
+print "bye \n"
