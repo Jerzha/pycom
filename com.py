@@ -9,7 +9,6 @@ import thread
 dev = sys.argv[1]
 se = serial.Serial(dev, 1500000)
 is_exit = False
-buff = ""
 
 
 def handle_sigint_tstp(sig, f):
@@ -37,8 +36,10 @@ def input_thread():
 def output_thread():
     global is_exit, se
     while not is_exit:
-        line = se.readline()
-        print str(line).rstrip('\n')
+        ch = se.read()
+        sys.stdout.write(ch)
+        sys.stdout.flush()
+
 
 if not se.is_open:
     print 'Cannot open', dev
