@@ -26,19 +26,25 @@ signal.signal(signal.SIGTSTP, handle_sigint_tstp)
 
 def input_thread():
     global is_exit, se
-    while not is_exit:
-        cmd = sys.stdin.readline()
-        if cmd.strip() == 'quit':
-            exit_com()
-        se.write(cmd)
+    try:
+        while not is_exit:
+            cmd = sys.stdin.readline()
+            if cmd.strip() == 'quit':
+                exit_com()
+            se.write(cmd)
+    except serial.serialutil.SerialException:
+        pass
 
 
 def output_thread():
     global is_exit, se
-    while not is_exit:
-        ch = se.read()
-        sys.stdout.write(ch)
-        sys.stdout.flush()
+    try:
+        while not is_exit:
+            ch = se.read()
+            sys.stdout.write(ch)
+            sys.stdout.flush()
+    except serial.serialutil.SerialException:
+        pass
 
 
 if not se.is_open:
