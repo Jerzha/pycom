@@ -4,7 +4,7 @@ The serial tool such as minicom cannot support baurdrate more then 1M (e.g. rk33
 but pyserial can do it.<br/>
 
 Usage:<br/>
-* ./pycom <dev> [-b <baurdrate>]<br/>
+* ./pycom <dev> [-b \<baurdrate\>]<br/>
 * the default value of baurdrate is 1500000
 * entry 'exit' to exit pycom <br/>
 
