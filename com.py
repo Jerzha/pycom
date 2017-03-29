@@ -2,12 +2,20 @@
 import sys
 import termios
 import threading
-
 import serial
 
-dev = sys.argv[1]
-se = serial.Serial(dev, 1500000)
+dev = ""
+baurdrate = 1500000
+se = None
 is_exit = False
+
+usage = '''
+Usage:
+    ./com <dev> [-b <baurdrate>]
+
+Example:
+    ./com /dev/tty.usbxxxxx -b 115200
+'''
 
 
 def exit_com():
@@ -24,12 +32,10 @@ def input_thread():
             ch = sys.stdin.read(1)
             cmd += ch
             se.write(ch)
-
             if cmd == 'exit\n':
                 exit_com()
             if ch == '\n':
                 cmd = ''
-
     except serial.serialutil.SerialException:
         pass
 
@@ -46,6 +52,20 @@ def output_thread():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 1:
+        print usage
+        exit(0)
+
+    argi = 1
+    while argi < len(sys.argv):
+        if sys.argv[argi] == '-b':
+            baurdrate = sys.argv[argi + 1]
+            argi += 1
+        else:
+            dev = sys.argv[argi]
+        argi += 1
+
+    se = serial.Serial(dev, baurdrate)
     if not se.is_open:
         print 'Cannot open', dev
         exit(-1)
