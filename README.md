@@ -11,4 +11,5 @@ Usage:<br/>
 Feature:<br/>
 * implement serial input/output
 * implement ctrl-c transport
+* implement all function keys transport
 * better then minicom
