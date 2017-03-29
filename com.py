@@ -52,6 +52,10 @@ if __name__ == '__main__':
 
     old_settings = termios.tcgetattr(sys.stdin)
     old3 = old_settings[3]
+
+    # disable PARMRK for func keys
+    # disable ICANON for echo back
+    # disable ISIG   for sending ctrl-c
     old_settings[3] = old3 & ~termios.PARMRK & ~termios.ICANON & ~termios.ISIG
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)

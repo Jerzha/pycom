@@ -5,7 +5,7 @@ but pyserial can do it.<br/>
 
 Usage:<br/>
 ./pycom /dev/tty.usbserial-xxxxxxx<br/>
-Entry 'quit' to exit pycom (ctrl-c will be sent to serial)<br/>
+Entry 'exit' to exit pycom (ctrl-c will be sent to serial)<br/>
 
 Feature:<br/>
 * implement serial input/output
