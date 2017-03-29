@@ -51,8 +51,10 @@ if __name__ == '__main__':
         exit(-1)
 
     old_settings = termios.tcgetattr(sys.stdin)
-    new_settings = [27394, 2, 19200, 71, 38400, 38400, ['\x04', '\xff', '\xff', '\x7f', '\x17', '\x15', '\x12', '\x00', '\x03', '\x1c', '\x1a', '\x19', '\x11', '\x13', '\x16', '\x0f', 1, 0, '\x14', '\x00']]
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, new_settings)
+    old3 = old_settings[3]
+    old_settings[3] = old3 & ~termios.PARMRK & ~termios.ICANON & ~termios.ISIG
+
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
     thread_input = threading.Thread(target=input_thread)
     thread_output = threading.Thread(target=output_thread)
@@ -65,4 +67,5 @@ if __name__ == '__main__':
     if thread_output.isAlive():
         thread_output.join()
 
+    old_settings[3] = old3
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
