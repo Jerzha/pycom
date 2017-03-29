@@ -10,10 +10,9 @@ se = None
 is_exit = False
 
 usage = '''
-Usage:
-    ./com <dev> [-b <baurdrate>]
-
+Usage: ./com <dev> [-b <baurdrate>]
 Example:
+    ./com /dev/tty.usbxxxxx
     ./com /dev/tty.usbxxxxx -b 115200
 '''
 
@@ -52,7 +51,7 @@ def output_thread():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 1:
+    if len(sys.argv) <= 1:
         print usage
         exit(0)
 
@@ -61,6 +60,9 @@ if __name__ == '__main__':
         if sys.argv[argi] == '-b':
             baurdrate = sys.argv[argi + 1]
             argi += 1
+        elif sys.argv[argi] == '-h':
+            print usage
+            exit(0)
         else:
             dev = sys.argv[argi]
         argi += 1
