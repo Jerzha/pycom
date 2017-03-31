@@ -67,6 +67,7 @@ if __name__ == '__main__':
             dev = sys.argv[argi]
         argi += 1
 
+    print "Opening", dev, baurdrate
     se = serial.Serial(dev, baurdrate)
     if not se.is_open:
         print 'Cannot open', dev
