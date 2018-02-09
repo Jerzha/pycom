@@ -1,7 +1,7 @@
 # pycom
 A Simple serial tool for MAC OSX / Linux
 The serial tool such as minicom cannot support baurdrate more then 1M (e.g. rk3399 using 1500000 for debug),
-but pyserial can do it.<br/>
+but pyserial works well.<br/>
 
 ## Usage:
 * ./com \<dev\> [-b \<baurdrate\>]<br/>
