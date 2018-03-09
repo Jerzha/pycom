@@ -30,7 +30,10 @@ def input_thread():
         while not is_exit:
             ch = sys.stdin.read(1)
             cmd += ch
-            se.write(ch)
+            if sys.version > '3':
+                se.write(bytes(ch, encoding='utf-8'))
+            else:
+                se.write(ch)
             if cmd == 'exit\n':
                 exit_com()
             if ch == '\n':
@@ -44,7 +47,10 @@ def output_thread():
     try:
         while not is_exit:
             ch = se.read()
-            sys.stdout.write(ch)
+            if sys.version > '3':
+                sys.stdout.write(str(ch, encoding='utf-8'))
+            else:
+                sys.stdout.write(ch)
             sys.stdout.flush()
     except serial.serialutil.SerialException:
         pass
@@ -52,7 +58,7 @@ def output_thread():
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print usage
+        print(usage)
         exit(0)
 
     argi = 1
@@ -61,16 +67,16 @@ if __name__ == '__main__':
             baurdrate = sys.argv[argi + 1]
             argi += 1
         elif sys.argv[argi] == '-h':
-            print usage
+            print(usage)
             exit(0)
         else:
             dev = sys.argv[argi]
         argi += 1
 
-    print "Opening", dev, baurdrate
+    print ("Opening %s %s" % (dev, baurdrate))
     se = serial.Serial(dev, baurdrate)
     if not se.is_open:
-        print 'Cannot open', dev
+        print ('Cannot open %s' % (dev))
         exit(-1)
 
     old_settings = termios.tcgetattr(sys.stdin)
