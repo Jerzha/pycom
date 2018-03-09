@@ -48,7 +48,10 @@ def output_thread():
         while not is_exit:
             ch = se.read()
             if sys.version > '3':
-                sys.stdout.write(str(ch, encoding='utf-8'))
+                try:
+                    sys.stdout.write(str(ch, encoding='utf-8'))
+                except Exception as err:
+                    sys.stdout.write("?")
             else:
                 sys.stdout.write(ch)
             sys.stdout.flush()
