@@ -4,7 +4,8 @@ The serial tool such as minicom cannot support baurdrate more then 1M (e.g. rk33
 but pyserial works well.<br/>
 
 ## Usage:
-* ./com \<dev\> [-b \<baurdrate\>]<br/>
+* install pyserial first
+* ./com /dev/tty.\<dev\> [-b \<baurdrate\>]<br/>
 * the default value of baurdrate is 1500000
 * entry 'exit' to exit pycom <br/>
 
@@ -13,7 +14,7 @@ but pyserial works well.<br/>
 * implement ctrl-c transport
 * implement all function keys transport
 
-## Attention:
+## Q&A:
 ```
 if you got "ImportError: cannot import name properties", please
    sudo easy_install pyserial first
