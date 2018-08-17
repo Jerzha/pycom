@@ -10,9 +10,9 @@ but pyserial works well.<br/>
 * entry 'exit' to exit pycom <br/>
 
 ## Feature:
-* implement serial input/output
-* implement ctrl-c transport
-* implement all function keys transport
+* Support serial input/output
+* Support ctrl-c transport
+* Support all function keys transport
 
 ## Q&A:
 ```
