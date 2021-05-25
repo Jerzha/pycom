@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 import termios
 import threading
@@ -98,9 +98,9 @@ if __name__ == '__main__':
     thread_input.start()
     thread_output.start()
 
-    if thread_input.isAlive():
+    if thread_input.is_alive:
         thread_input.join()
-    if thread_output.isAlive():
+    if thread_output.is_alive:
         thread_output.join()
 
     old_settings[3] = old3
